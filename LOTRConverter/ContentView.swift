@@ -100,19 +100,22 @@ struct ContentView: View {
                     Button {
                         showExchangeInfo.toggle()
                         
-                        
                     } label: {
                         Image(systemName: "info.circle.fill")
                             .font(.largeTitle)
                             .foregroundStyle(.white)
                     }
                     .padding(.trailing)
+                    
                 }
 
             }
             
 //            .border(.blue)
           
+        }
+        .sheet(isPresented: $showExchangeInfo){ // the sheet can be placed anywhere prefably top stack in this case Zstack
+            ExchangeInfo()
         }
     }
 }
