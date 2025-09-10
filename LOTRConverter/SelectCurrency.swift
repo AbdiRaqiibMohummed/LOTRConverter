@@ -9,33 +9,47 @@ import SwiftUI
 
 struct SelectCurrency: View {
     @Environment(\.dismiss) var dismiss
-    
-   
+    let currencyImages: [ImageResource] = [
+        .copperpenny,
+        .silverpenny,
+        .goldpenny,
+        .goldpiece,
+        .silverpiece,
+        
+    ]
+
+    let currencyNames = [
+        "Copper Penny", "Silver Penny", "Gold Penny", "Gold Piece", "Silver Piece",
+    ]
+
     var body: some View {
-        ZStack{
+        ZStack {
             Image(.parchment)
                 .resizable()
                 .ignoresSafeArea()
                 .background(.brown)
-            VStack{
+            VStack {
                 Text("Select the currency you are starting with:")
                     .fontWeight(.bold)
-                  
+
                 //Currency Icons
-                HStack{
-                    CurrencyIcon(currencyImage: .copperpenny, currencyName: "Copper Penny")
-                  
+                LazyVGrid(columns: [GridItem(), GridItem(), GridItem()]) {
+                    ForEach(0..<currencyImages.count, id: \.self) { index in
+                        CurrencyIcon(
+                            currencyImage: currencyImages[index],
+                            currencyName: currencyNames[index]
+                        )
+                    }
                 }
-                
+
                 // Text
                 Text("Select the currency you would like to convert to:")
                     .fontWeight(.bold)
-            
-                
+
                 // Done Button
 
                 Button("Done") {
-                   dismiss()
+                    dismiss()
                 }
                 .buttonStyle(.borderedProminent)
                 .tint(.brown.mix(with: .black, by: 0.2))
@@ -45,7 +59,7 @@ struct SelectCurrency: View {
 
             }
             .padding()
-            .multilineTextAlignment(.center) // this basically centers the text in the whole vstack
+            .multilineTextAlignment(.center)  // this basically centers the text in the whole vstack
         }
     }
 }
@@ -53,4 +67,3 @@ struct SelectCurrency: View {
 #Preview {
     SelectCurrency()
 }
-
