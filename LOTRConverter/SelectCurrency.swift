@@ -9,18 +9,7 @@ import SwiftUI
 
 struct SelectCurrency: View {
     @Environment(\.dismiss) var dismiss
-    let currencyImages: [ImageResource] = [
-        .copperpenny,
-        .silverpenny,
-        .goldpenny,
-        .goldpiece,
-        .silverpiece,
-        
-    ]
 
-    let currencyNames = [
-        "Copper Penny", "Silver Penny", "Gold Penny", "Gold Piece", "Silver Piece",
-    ]
 
     var body: some View {
         ZStack {
@@ -34,10 +23,10 @@ struct SelectCurrency: View {
 
                 //Currency Icons
                 LazyVGrid(columns: [GridItem(), GridItem(), GridItem()]) {
-                    ForEach(0..<currencyImages.count, id: \.self) { index in
+                    ForEach(0..<5) { index in
                         CurrencyIcon(
-                            currencyImage: currencyImages[index],
-                            currencyName: currencyNames[index]
+                            currencyImage: .silverpenny,
+                            currencyName: "Silver Penny"
                         )
                     }
                 }
