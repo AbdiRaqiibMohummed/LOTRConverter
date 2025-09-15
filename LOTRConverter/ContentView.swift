@@ -62,6 +62,7 @@ struct ContentView: View {
 
                         TextField("Amount", text: $leftAmount)
                             .textFieldStyle(.roundedBorder)
+                         
 
                     }
                     // Equal sign
@@ -108,7 +109,7 @@ struct ContentView: View {
                 HStack {
                     Spacer()
                     Button {
-                        showExchangeInfo.toggle()
+                        showExchangeInfo.toggle() // flips from false to true to make the info sheet appear
 
                     } label: {
                         Image(systemName: "info.circle.fill")
@@ -128,7 +129,7 @@ struct ContentView: View {
             ExchangeInfo()
         }
         .sheet(isPresented: $showSelectCurrency){
-            SelectCurrency(topCurrency: leftCurrency, bottomCurrency: rightCurrency)
+            SelectCurrency(topCurrency: $leftCurrency, bottomCurrency: $rightCurrency)
         }
     }
 }
