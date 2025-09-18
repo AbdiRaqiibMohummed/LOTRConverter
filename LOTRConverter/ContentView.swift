@@ -65,8 +65,11 @@ struct ContentView: View {
 
                         TextField("Amount", text: $leftAmount)
                             .textFieldStyle(.roundedBorder)
+                            .focused($leftTyping) // you need this property on what you want the focus to be
                             .onChange(of: leftAmount) {
-                                rightAmount = leftCurrency.convert(leftAmount, to: rightCurrency)
+                                if leftTyping{
+                                    rightAmount = leftCurrency.convert(leftAmount, to: rightCurrency)
+                                }
                             }
                          
 
@@ -103,8 +106,13 @@ struct ContentView: View {
                         TextField("Amount", text: $rightAmount)
                             .textFieldStyle(.roundedBorder)
                             .multilineTextAlignment(.trailing)
+                            .focused($rightTyping) // remeber this is also checking for the rightfield
                             .onChange(of: rightAmount){
-                                leftAmount = rightCurrency.convert(rightAmount, to: leftCurrency)
+                                if rightTyping{
+                                    leftAmount = rightCurrency.convert(rightAmount, to: leftCurrency)
+                                   
+                                }
+                                
                             }
                     }
                 }
